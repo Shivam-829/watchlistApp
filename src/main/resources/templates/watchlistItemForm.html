@@ -119,6 +119,9 @@
         </div>
     </div>
     <input type="hidden" th:field="*{star}" id="starValue" name="star" value="1"> <!-- Hidden input to store the selected value -->
+    <div class="col-sm-4">
+        <span class="text-danger" th:errors="*{star}"> </span>
+    </div>
 </div>
 </div>
 <div class "form-group row">

@@ -3,7 +3,9 @@ package com.example.watchlistApp.Controller;
 import com.example.watchlistApp.Entity.Movie;
 import com.example.watchlistApp.Services.DatabaseService;
 import jakarta.persistence.criteria.CriteriaBuilder;
+import jakarta.validation.Valid;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.servlet.ModelAndView;
 import org.springframework.web.servlet.view.RedirectView;
@@ -33,8 +35,11 @@ public class MovieController {
         return new ModelAndView(viewname,model);
     }
     @PostMapping ("/watchlistItemForm")
-    public ModelAndView submitwatchlistform(Movie movie)
+    public ModelAndView submitwatchlistform(@Valid @ModelAttribute("watchlistItem") Movie movie ,BindingResult bindingResult  )
     {
+        if(bindingResult.hasErrors())
+           return new ModelAndView("watchlistItemForm");
+
        databaseService.create(movie);
 //        RedirectView rd=new RedirectView();
 //         rd.setUrl("/watchlist");
